@@ -6,3 +6,8 @@ _ gives the current value
 for example: 
 3 + 5 = 8
 _ + 8 = 16
+
+
+
+#Sync = Blocking , Async = NonBlocking
+
