@@ -2,6 +2,7 @@ const fs = require("fs");
 const crypto = require("crypto");
 
 const start = Date.now();
+process.env.UV_THREADPOOL_SIZE = 1;
 
 setTimeout(() => console.log("Timer 1 finished"), 0);
 
