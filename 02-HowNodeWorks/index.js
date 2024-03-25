@@ -1,4 +1,7 @@
 const fs = require("fs");
+const crypto = require("crypto");
+
+const start = Date.now();
 
 setTimeout(() => console.log("Timer 1 finished"), 0);
 
@@ -14,6 +17,19 @@ fs.readFile("test-file.txt", () => {
   setImmediate(() => console.log("Immediate 2 finished"));
 
   process.nextTick(() => console.log("process.nextTick"));
+
+  crypto.pbkdf2("password", "sat", 100000, 1024, "sha512", () => {
+    console.log(Date.now() - start, "password encryped");
+  });
+  crypto.pbkdf2("password", "sat", 100000, 1024, "sha512", () => {
+    console.log(Date.now() - start, "password encryped");
+  });
+  crypto.pbkdf2("password", "sat", 100000, 1024, "sha512", () => {
+    console.log(Date.now() - start, "password encryped");
+  });
+  crypto.pbkdf2("password", "sat", 100000, 1024, "sha512", () => {
+    console.log(Date.now() - start, "password encryped");
+  });
 });
 
 console.log("Hello from the top level code");
