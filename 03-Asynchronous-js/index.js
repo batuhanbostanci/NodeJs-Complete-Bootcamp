@@ -59,21 +59,26 @@ const writeFileWithPromises = (file, data) => {
   });
 };
 
-readFilePromises(`${__dirname}/dog.txt`).then((data) => {
-  console.log(`Breed: ${data}`);
-  //there are 2 then, and they are promises so, we can convert them as as promise
-  superagent
-    .get(`https://dog.ceo/api/breed/${data}/images/random`)
-    .then((res) => {
-      console.log(res.body.message);
+readFilePromises(`${__dirname}/dog.txt`)
+  .then((data) => {
+    console.log(`Breed: ${data}`);
+    //there are 2 then, and they are promises so, we can convert them as as promise
+    return superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
+  })
+  .then((res) => {
+    console.log(res.body.message);
 
-      fs.writeFile('dog-img.txt', res.body.message, (err) => {
-        if (err) return console.log(err.message);
+    return writeFileWithPromises('dog-img.txt', res.body.message);
 
-        console.log('image was saved successfully');
-      });
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-});
+    // fs.writeFile('dog-img.txt', res.body.message, (err) => {
+    //   if (err) return console.log(err.message);
+
+    //   console.log('image was saved successfully');
+    // });
+  })
+  .then(() => {
+    console.log('random dog image saved to file');
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
