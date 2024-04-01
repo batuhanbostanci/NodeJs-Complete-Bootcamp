@@ -49,9 +49,19 @@ const readFilePromises = (file) => {
   });
 };
 
+const writeFileWithPromises = (file, data) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(file, data, (err) => {
+      if (err) reject('could not write file');
+
+      resolve('success');
+    });
+  });
+};
+
 readFilePromises(`${__dirname}/dog.txt`).then((data) => {
   console.log(`Breed: ${data}`);
-
+  //there are 2 then, and they are promises so, we can convert them as as promise
   superagent
     .get(`https://dog.ceo/api/breed/${data}/images/random`)
     .then((res) => {
