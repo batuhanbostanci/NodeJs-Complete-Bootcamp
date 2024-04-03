@@ -89,7 +89,7 @@ readFilePromises(`${__dirname}/dog.txt`)
 
 const getDogPic = async () => {
   try {
-    const data = await readFilePromises(`${__dirname}/dogg.txt`);
+    const data = await readFilePromises(`${__dirname}/dog.txt`);
     console.log(`Breed: ${data}`);
 
     const res = await superagent.get(
@@ -121,12 +121,25 @@ const getDogPic = async () => {
 // });
 
 //if there is a error log below.
-console.log('1: will get dog pics');
-getDogPic()
-  .then((x) => {
+// console.log('1: will get dog pics');
+// getDogPic()
+//   .then((x) => {
+//     console.log(x);
+//     console.log('2:Done getting dog pics!');
+//   })
+//   .catch((err) => {
+//     console.log('Error');
+//   });
+
+//Making upper logic with async await way!
+
+(async () => {
+  try {
+    console.log('1: will get dog pics');
+    const x = await getDogPic();
     console.log(x);
     console.log('2:Done getting dog pics!');
-  })
-  .catch((err) => {
-    console.log('Error');
-  });
+  } catch (err) {
+    console.log('error');
+  }
+})();
