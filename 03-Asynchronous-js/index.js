@@ -86,3 +86,22 @@ readFilePromises(`${__dirname}/dog.txt`)
  */
 
 // consuming promises with async/await
+
+const getDogPic = async () => {
+  try {
+    const data = await readFilePromises(`${__dirname}/dog.txt`);
+    console.log(`Breed: ${data}`);
+
+    const res = await superagent.get(
+      `https://dog.ceo/api/breed/${data}/images/random`
+    );
+    console.log(res.body.message);
+
+    await writeFileWithPromises('dog-img.txt', res.body.message);
+    console.log('image was saved successfully');
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+getDogPic();
