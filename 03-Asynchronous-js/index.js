@@ -89,7 +89,7 @@ readFilePromises(`${__dirname}/dog.txt`)
 
 const getDogPic = async () => {
   try {
-    const data = await readFilePromises(`${__dirname}/dog.txt`);
+    const data = await readFilePromises(`${__dirname}/dogg.txt`);
     console.log(`Breed: ${data}`);
 
     const res = await superagent.get(
@@ -101,7 +101,32 @@ const getDogPic = async () => {
     console.log('image was saved successfully');
   } catch (err) {
     console.log(err);
+    throw err;
   }
+
+  return '2: Ready';
 };
 
-getDogPic();
+//This will print the promises, to see run that part of the code
+// console.log('1: will get dog pics');
+// const x = getDogPic();
+// console.log(x);
+// console.log('2:Done getting dog pics!');
+
+//it returns promises, that is why we use then to get actual value of it.
+// console.log('1: will get dog pics');
+// getDogPic().then((x) => {
+//   console.log(x);
+//   console.log('2:Done getting dog pics!');
+// });
+
+//if there is a error log below.
+console.log('1: will get dog pics');
+getDogPic()
+  .then((x) => {
+    console.log(x);
+    console.log('2:Done getting dog pics!');
+  })
+  .catch((err) => {
+    console.log('Error');
+  });
