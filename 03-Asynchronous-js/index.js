@@ -59,6 +59,7 @@ const writeFileWithPromises = (file, data) => {
   });
 };
 
+/*
 readFilePromises(`${__dirname}/dog.txt`)
   .then((data) => {
     console.log(`Breed: ${data}`);
@@ -82,3 +83,6 @@ readFilePromises(`${__dirname}/dog.txt`)
   .catch((err) => {
     console.log(err.message);
   });
+ */
+
+// consuming promises with async/await
